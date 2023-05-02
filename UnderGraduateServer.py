@@ -74,9 +74,10 @@ def processInput() :
 
 def UniversityRank():
   url = "http://www.4icu.org/us/"
-  handle = urllib.request.urlopen(url)
-  html =  handle.read()
-  html=html.decode("utf8")
+  headers = {'User-Agent': 'Mozilla/5.0'}
+  req = urllib.request.Request(url, headers=headers)
+  handle = urllib.request.urlopen(req)
+  html = handle.read().decode("utf8")
   result ={}
   location =0
   rank =0
@@ -178,7 +179,7 @@ def Recommendations(data):
 def main():
    print("loading Recent University data")
   
-   user_data =extractRankingField("WebScraped_data/csv/MERGED2016_17_PP.csv", ['INSTNM', 'CITY', 'STABBR' ,'TUITIONFEE_OUT',  'SAT_AVG_ALL', 'ADM_RATE_ALL', 'DEBT_MDN_SUPP', 'UGDS_MEN'])
+   user_data =extractRankingField('WebScraped_data/csv/MERGED2016_17_PP.csv', ['INSTNM', 'CITY', 'STABBR' ,'TUITIONFEE_OUT',  'SAT_AVG_ALL', 'ADM_RATE_ALL', 'DEBT_MDN_SUPP', 'UGDS_MEN'])
    college_rank = UniversityRank()
    final_data = ProcessFinalData(user_data, college_rank)
    saveData(final_data)

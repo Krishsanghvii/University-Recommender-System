@@ -134,7 +134,7 @@ def undergraduatealgo():
   
 @app.route('/graduatealgo')
 def graduatealgo():
-    data = pd.read_csv('WebScraped_data\csv\Final.csv')
+    data = pd.read_csv('WebScraped_data/csv/processed_data.csv')
     data.drop(data.columns[data.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
     greV = float(request.args.get("greV"))
     greQ = float(request.args.get("greQ"))
